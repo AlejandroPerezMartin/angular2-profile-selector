@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule, PreloadAllModules, NoPreloading } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -13,10 +13,9 @@ import { AppRoutes } from './app.routes';
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HomeComponent } from './home/home.component';
-
+import { AuthService } from './_services/auth.service';
 import { AuthModule } from './auth/auth.module';
 import { DashboardModule } from './dashboard/dashboard.module';
-import { SidebarComponent } from './sidebar/sidebar.component';
 
 const firebaseAuthConfig = {
   provider: AuthProviders.Google,
@@ -38,10 +37,9 @@ const firebaseAuthConfig = {
   declarations: [
     AppComponent,
     PageNotFoundComponent,
-    HomeComponent,
-    SidebarComponent
+    HomeComponent
   ],
-  providers: [],
+  providers: [ AuthService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

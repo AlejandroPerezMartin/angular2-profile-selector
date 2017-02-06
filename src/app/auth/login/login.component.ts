@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
+import { Router } from '@angular/router';
+import { AuthService } from '../../_services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -8,19 +9,13 @@ import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
 })
 export class LoginComponent {
 
-  constructor(public af: AngularFire) {
-    this.af.auth.subscribe(auth => console.log(auth));
-  }
+  constructor(public authService: AuthService, private router: Router) {}
 
   login() {
-    this.af.auth.login({
-      provider: AuthProviders.Google,
-      method: AuthMethods.Popup,
-    });
+    this.authService.login();
   }
 
   logout() {
-     this.af.auth.logout();
+    this.authService.logout();
   }
-
 }
